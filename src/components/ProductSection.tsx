@@ -24,7 +24,7 @@ const ProductSection = () => {
         >
           <p className="text-sm uppercase tracking-[0.2em] text-accent font-semibold mb-3">Il Prodotto</p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
-            SismoGuard <span className="text-gradient">Sensor</span>
+            sisma.net <span className="text-gradient">Sensor</span>
           </h2>
           <p className="max-w-2xl mx-auto text-muted-foreground text-lg leading-relaxed">
             Un dispositivo compatto e intelligente che rileva le onde sismiche e ti avvisa in tempo reale.
@@ -43,7 +43,7 @@ const ProductSection = () => {
             <div className="rounded-2xl overflow-hidden border border-border shadow-2xl">
               <img
                 src={productImg}
-                alt="SismoGuard Arduino Seismograph"
+                alt="sisma.net Arduino Seismograph"
                 className="w-full h-auto"
               />
             </div>
@@ -60,30 +60,19 @@ const ProductSection = () => {
               Specifiche Tecniche
             </h3>
             <ul className="space-y-4 text-muted-foreground">
-              <li className="flex items-start gap-3">
-                <span className="w-2 h-2 mt-2 rounded-full bg-accent flex-shrink-0" />
-                <span><strong className="text-foreground">Processore:</strong> Arduino Uno R3 / Nano</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="w-2 h-2 mt-2 rounded-full bg-accent flex-shrink-0" />
-                <span><strong className="text-foreground">Sensore:</strong> Accelerometro ADXL345 a 3 assi</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="w-2 h-2 mt-2 rounded-full bg-accent flex-shrink-0" />
-                <span><strong className="text-foreground">Connettività:</strong> Modulo ESP8266 WiFi</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="w-2 h-2 mt-2 rounded-full bg-accent flex-shrink-0" />
-                <span><strong className="text-foreground">Alimentazione:</strong> USB 5V / Batteria di backup</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="w-2 h-2 mt-2 rounded-full bg-accent flex-shrink-0" />
-                <span><strong className="text-foreground">Dimensioni:</strong> 12 × 8 × 5 cm</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="w-2 h-2 mt-2 rounded-full bg-accent flex-shrink-0" />
-                <span><strong className="text-foreground">Software:</strong> Dashboard web per visualizzazione dati</span>
-              </li>
+              {[
+                { label: "Processore", value: "Arduino Uno R3 / Nano" },
+                { label: "Sensore", value: "Accelerometro ADXL345 a 3 assi" },
+                { label: "Connettività", value: "Modulo ESP8266 WiFi" },
+                { label: "Alimentazione", value: "USB 5V / Batteria di backup" },
+                { label: "Dimensioni", value: "12 × 8 × 5 cm" },
+                { label: "Software", value: "Dashboard web per visualizzazione dati" },
+              ].map((spec, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <span className="w-2 h-2 mt-2 rounded-full bg-accent flex-shrink-0" />
+                  <span><strong className="text-foreground">{spec.label}:</strong> {spec.value}</span>
+                </li>
+              ))}
             </ul>
           </motion.div>
         </div>

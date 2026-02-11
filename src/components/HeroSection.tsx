@@ -25,7 +25,7 @@ const HeroSection = () => {
             Monitoraggio Sismico Accessibile
           </p>
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-primary-foreground leading-tight mb-6">
-            Sismo<span className="text-gradient">Guard</span>
+            sisma<span className="text-gradient">.net</span>
           </h1>
           <p className="max-w-2xl mx-auto text-lg md:text-xl text-primary-foreground/70 font-body leading-relaxed mb-10">
             Un sismografo Arduino open-source per proteggere la tua comunità.
