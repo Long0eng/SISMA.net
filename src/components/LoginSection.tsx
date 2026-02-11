@@ -10,7 +10,6 @@ const LoginSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Placeholder - would connect to backend
     alert(isLogin ? "Login effettuato!" : "Registrazione completata! Riceverai notifiche sismiche.");
   };
 
@@ -32,7 +31,7 @@ const LoginSection = () => {
               Resta <span className="text-gradient">allertato</span>
             </h2>
             <p className="text-muted-foreground">
-              Accedi o registrati per ricevere notifiche in tempo reale quando il tuo SismoGuard rileva attività sismica.
+              Accedi o registrati per ricevere notifiche in tempo reale quando il tuo sisma.net rileva attività sismica.
             </p>
           </motion.div>
 

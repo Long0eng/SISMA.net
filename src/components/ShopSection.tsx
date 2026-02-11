@@ -41,7 +41,7 @@ const ShopSection = () => {
             Scegli il tuo <span className="text-gradient">piano</span>
           </h2>
           <p className="max-w-2xl mx-auto text-muted-foreground text-lg">
-            Proteggi la tua casa, la tua scuola o il tuo edificio con SismoGuard.
+            Proteggi la tua casa, la tua scuola o il tuo edificio con sisma.net.
           </p>
         </motion.div>
 

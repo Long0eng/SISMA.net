@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 const navItems = [
   { label: "Chi Siamo", href: "#chi-siamo" },
   { label: "Prodotto", href: "#prodotto" },
+  { label: "Mappa Sismica", href: "#mappa" },
   { label: "Acquista", href: "#acquista" },
   { label: "Login", href: "#login" },
 ];
@@ -21,7 +22,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
         <a href="#" className="font-display text-xl font-bold tracking-tight text-foreground">
-          Sismo<span className="text-gradient">Guard</span>
+          sisma<span className="text-gradient">.net</span>
         </a>
 
         {/* Desktop */}

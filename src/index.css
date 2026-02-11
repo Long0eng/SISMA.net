@@ -6,40 +6,40 @@
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 220 30% 12%;
+    --background: 210 40% 98%;
+    --foreground: 215 30% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 30% 12%;
+    --card-foreground: 215 30% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 30% 12%;
+    --popover-foreground: 215 30% 12%;
 
-    --primary: 220 60% 20%;
-    --primary-foreground: 40 30% 95%;
+    --primary: 215 70% 35%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 35 80% 55%;
-    --secondary-foreground: 220 60% 10%;
+    --secondary: 200 80% 55%;
+    --secondary-foreground: 215 70% 10%;
 
-    --muted: 220 15% 92%;
-    --muted-foreground: 220 10% 45%;
+    --muted: 210 30% 93%;
+    --muted-foreground: 215 15% 45%;
 
-    --accent: 35 80% 55%;
-    --accent-foreground: 220 60% 10%;
+    --accent: 200 80% 55%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 88%;
-    --input: 220 15% 88%;
-    --ring: 220 60% 20%;
+    --border: 210 25% 88%;
+    --input: 210 25% 88%;
+    --ring: 215 70% 35%;
 
     --radius: 0.75rem;
 
-    --hero-gradient: linear-gradient(135deg, hsl(220 60% 12%) 0%, hsl(220 50% 22%) 50%, hsl(200 40% 28%) 100%);
-    --seismic-glow: 35 90% 55%;
-    --seismic-line: 35 100% 60%;
-    --surface-glass: 220 20% 98% / 0.8;
+    --hero-gradient: linear-gradient(135deg, hsl(215 70% 15%) 0%, hsl(210 60% 30%) 50%, hsl(200 70% 40%) 100%);
+    --seismic-glow: 200 80% 55%;
+    --seismic-line: 200 90% 60%;
+    --surface-glass: 210 40% 98% / 0.85;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -52,25 +52,25 @@
   }
 
   .dark {
-    --background: 220 25% 8%;
-    --foreground: 220 15% 90%;
-    --card: 220 25% 12%;
-    --card-foreground: 220 15% 90%;
-    --popover: 220 25% 12%;
-    --popover-foreground: 220 15% 90%;
-    --primary: 35 80% 55%;
-    --primary-foreground: 220 60% 10%;
-    --secondary: 220 40% 25%;
-    --secondary-foreground: 220 15% 90%;
-    --muted: 220 20% 18%;
-    --muted-foreground: 220 10% 55%;
-    --accent: 35 80% 55%;
-    --accent-foreground: 220 60% 10%;
+    --background: 215 30% 8%;
+    --foreground: 210 20% 92%;
+    --card: 215 30% 12%;
+    --card-foreground: 210 20% 92%;
+    --popover: 215 30% 12%;
+    --popover-foreground: 210 20% 92%;
+    --primary: 200 80% 55%;
+    --primary-foreground: 215 70% 10%;
+    --secondary: 215 50% 28%;
+    --secondary-foreground: 210 20% 92%;
+    --muted: 215 25% 18%;
+    --muted-foreground: 210 15% 55%;
+    --accent: 200 80% 55%;
+    --accent-foreground: 215 70% 10%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 220 20% 20%;
-    --input: 220 20% 20%;
-    --ring: 35 80% 55%;
+    --border: 215 25% 20%;
+    --input: 215 25% 20%;
+    --ring: 200 80% 55%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -108,7 +108,7 @@
     border-color: hsl(var(--seismic-line));
   }
   .text-gradient {
-    background: linear-gradient(135deg, hsl(35 80% 55%), hsl(35 100% 65%));
+    background: linear-gradient(135deg, hsl(200 80% 55%), hsl(215 70% 45%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -122,8 +122,8 @@
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px hsl(35 90% 55% / 0.3); }
-  50% { box-shadow: 0 0 40px hsl(35 90% 55% / 0.6); }
+  0%, 100% { box-shadow: 0 0 20px hsl(200 80% 55% / 0.3); }
+  50% { box-shadow: 0 0 40px hsl(200 80% 55% / 0.6); }
 }
 
 .animate-seismic {
