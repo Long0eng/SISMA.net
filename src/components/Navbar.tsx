@@ -22,7 +22,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
         <a href="#" className="font-display text-xl font-bold tracking-tight text-foreground">
-          sisma<span className="text-gradient">.net</span>
+          SISMA<span className="text-gradient">.net</span>
         </a>
 
         {/* Desktop */}

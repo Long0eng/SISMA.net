@@ -24,7 +24,7 @@ const ProductSection = () => {
         >
           <p className="text-sm uppercase tracking-[0.2em] text-accent font-semibold mb-3">Il Prodotto</p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
-            sisma.net <span className="text-gradient">Sensor</span>
+            SISMA.net <span className="text-gradient">Sensor</span>
           </h2>
           <p className="max-w-2xl mx-auto text-muted-foreground text-lg leading-relaxed">
             Un dispositivo compatto e intelligente che rileva le onde sismiche e ti avvisa in tempo reale.
@@ -43,7 +43,7 @@ const ProductSection = () => {
             <div className="rounded-2xl overflow-hidden border border-border shadow-2xl">
               <img
                 src={productImg}
-                alt="sisma.net Arduino Seismograph"
+                alt="SISMA.net Arduino Seismograph"
                 className="w-full h-auto"
               />
             </div>

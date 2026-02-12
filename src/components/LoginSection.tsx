@@ -31,7 +31,7 @@ const LoginSection = () => {
               Resta <span className="text-gradient">allertato</span>
             </h2>
             <p className="text-muted-foreground">
-              Accedi o registrati per ricevere notifiche in tempo reale quando il tuo sisma.net rileva attività sismica.
+              Accedi o registrati per ricevere notifiche in tempo reale quando il tuo SISMA.net rileva attività sismica.
             </p>
           </motion.div>
 
