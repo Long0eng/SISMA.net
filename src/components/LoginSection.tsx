@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Lock, Eye, EyeOff, Bell } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, Bell, Phone } from "lucide-react";
 
 const LoginSection = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -75,6 +75,19 @@ const LoginSection = () => {
                   />
                 </div>
               )}
+
+              {/* Phone number */}
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-1.5">Numero di telefono</label>
+                <div className="relative">
+                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <input
+                    type="tel"
+                    placeholder="+39 333 1234567"
+                    className="w-full rounded-lg border border-input bg-background pl-10 pr-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition"
+                  />
+                </div>
+              </div>
 
               <div>
                 <label className="block text-sm font-medium text-foreground mb-1.5">Email</label>

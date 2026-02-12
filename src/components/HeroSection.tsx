@@ -28,7 +28,7 @@ const HeroSection = () => {
             SISMA<span className="text-gradient">.net</span>
           </h1>
           <p className="max-w-2xl mx-auto text-lg md:text-xl text-primary-foreground/70 font-body leading-relaxed mb-10">
-            Un sismografo Arduino open-source per proteggere la tua comunità.
+            Un sismografo Arduino per proteggere la tua comunità.
             Installabile in luoghi pubblici e privati, con notifiche in tempo reale.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

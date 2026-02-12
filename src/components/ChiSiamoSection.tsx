@@ -75,8 +75,8 @@ const ChiSiamoSection = () => {
             },
             {
               icon: Target,
-              title: "Open Source",
-              desc: "Il progetto è aperto: chiunque può contribuire, migliorare e adattare il sistema.",
+              title: "Innovazione",
+              desc: "Tecnologia avanzata e ricerca continua per offrire un sistema di monitoraggio sempre più preciso e affidabile.",
             },
             {
               icon: ShieldCheck,
