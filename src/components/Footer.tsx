@@ -5,7 +5,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <p className="font-display text-lg font-bold text-primary-foreground">
-              sisma<span className="text-gradient">.net</span>
+              SISMA<span className="text-gradient">.net</span>
             </p>
             <p className="text-sm text-primary-foreground/50 mt-1">
               Monitoraggio sismico accessibile per tutti.
@@ -20,7 +20,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-8 pt-6 border-t border-primary-foreground/10 text-center text-xs text-primary-foreground/30">
-          © 2025 sisma.net. Tutti i diritti riservati.
+          © 2025 SISMA.net. Tutti i diritti riservati.
         </div>
       </div>
     </footer>
