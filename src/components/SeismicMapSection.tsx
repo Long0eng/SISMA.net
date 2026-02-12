@@ -9,20 +9,21 @@ interface EarthquakeZone {
   risk: "alto" | "medio" | "basso";
   description: string;
   recentEvents: string;
-  cx: number;
-  cy: number;
+  lat: number;
+  lng: number;
 }
 
 const zones: EarthquakeZone[] = [
-  { id: "friuli", name: "Friuli-Venezia Giulia", region: "Nord-Est", risk: "alto", description: "Zona ad alta sismicità, colpita dal devastante terremoto del 1976.", recentEvents: "Magnitudo 6.4 (1976)", cx: 305, cy: 95 },
-  { id: "emilia", name: "Emilia-Romagna", region: "Nord", risk: "medio", description: "Attività sismica moderata, terremoto del 2012 nella pianura padana.", recentEvents: "Magnitudo 5.9 (2012)", cx: 245, cy: 145 },
-  { id: "toscana", name: "Toscana", region: "Centro", risk: "medio", description: "Rischio sismico medio, area del Mugello e Garfagnana particolarmente attive.", recentEvents: "Magnitudo 4.5 (2019)", cx: 215, cy: 195 },
-  { id: "umbria", name: "Umbria", region: "Centro", risk: "alto", description: "Zona altamente sismica. Terremoto di Norcia nel 2016.", recentEvents: "Magnitudo 6.5 (2016)", cx: 255, cy: 225 },
-  { id: "lazio", name: "Lazio (Amatrice)", region: "Centro", risk: "alto", description: "Epicentro del terremoto devastante del 2016 che ha causato 299 vittime.", recentEvents: "Magnitudo 6.0 (2016)", cx: 270, cy: 255 },
-  { id: "abruzzo", name: "Abruzzo (L'Aquila)", region: "Centro-Sud", risk: "alto", description: "Terremoto dell'Aquila del 2009, 309 vittime. Zona ad altissima pericolosità.", recentEvents: "Magnitudo 6.3 (2009)", cx: 280, cy: 265 },
-  { id: "campania", name: "Campania (Irpinia)", region: "Sud", risk: "alto", description: "Terremoto dell'Irpinia del 1980 con quasi 3.000 vittime.", recentEvents: "Magnitudo 6.9 (1980)", cx: 275, cy: 310 },
-  { id: "calabria", name: "Calabria", region: "Sud", risk: "alto", description: "Una delle regioni più sismiche d'Italia, soggetta a forti terremoti storici.", recentEvents: "Magnitudo 5.0 (2023)", cx: 295, cy: 380 },
-  { id: "sicilia", name: "Sicilia orientale", region: "Isole", risk: "alto", description: "Zona dell'Etna e dello Stretto di Messina, altissimo rischio sismico.", recentEvents: "Magnitudo 4.8 (2018)", cx: 275, cy: 430 },
+  { id: "friuli", name: "Friuli-Venezia Giulia", region: "Nord-Est", risk: "alto", description: "Zona ad alta sismicità, colpita dal devastante terremoto del 1976.", recentEvents: "Magnitudo 6.4 (1976)", lat: 46.25, lng: 13.1 },
+  { id: "emilia", name: "Emilia-Romagna", region: "Nord", risk: "medio", description: "Attività sismica moderata, terremoto del 2012 nella pianura padana.", recentEvents: "Magnitudo 5.9 (2012)", lat: 44.8, lng: 11.3 },
+  { id: "garfagnana", name: "Garfagnana (Toscana)", region: "Centro", risk: "medio", description: "Area della Garfagnana e Mugello con attività sismica ricorrente.", recentEvents: "Magnitudo 4.5 (2019)", lat: 44.1, lng: 10.5 },
+  { id: "umbria", name: "Umbria-Marche", region: "Centro", risk: "alto", description: "Zona altamente sismica. Terremoto di Norcia nel 2016 e sequenza sismica del 1997.", recentEvents: "Magnitudo 6.5 (2016)", lat: 42.8, lng: 13.0 },
+  { id: "lazio", name: "Amatrice (Lazio)", region: "Centro", risk: "alto", description: "Epicentro del terremoto devastante del 2016 che ha causato 299 vittime.", recentEvents: "Magnitudo 6.0 (2016)", lat: 42.63, lng: 13.29 },
+  { id: "abruzzo", name: "L'Aquila (Abruzzo)", region: "Centro-Sud", risk: "alto", description: "Terremoto dell'Aquila del 2009, 309 vittime. Zona ad altissima pericolosità.", recentEvents: "Magnitudo 6.3 (2009)", lat: 42.35, lng: 13.4 },
+  { id: "campania", name: "Irpinia (Campania)", region: "Sud", risk: "alto", description: "Terremoto dell'Irpinia del 1980 con quasi 3.000 vittime.", recentEvents: "Magnitudo 6.9 (1980)", lat: 40.85, lng: 15.3 },
+  { id: "calabria", name: "Calabria", region: "Sud", risk: "alto", description: "Una delle regioni più sismiche d'Italia, soggetta a forti terremoti storici.", recentEvents: "Magnitudo 5.0 (2023)", lat: 39.0, lng: 16.5 },
+  { id: "sicilia", name: "Sicilia orientale", region: "Isole", risk: "alto", description: "Zona dell'Etna e dello Stretto di Messina, altissimo rischio sismico.", recentEvents: "Magnitudo 4.8 (2018)", lat: 37.5, lng: 15.1 },
+  { id: "gargano", name: "Gargano (Puglia)", region: "Sud", risk: "medio", description: "Area del promontorio del Gargano con sismicità moderata.", recentEvents: "Magnitudo 4.7 (2023)", lat: 41.7, lng: 15.9 },
 ];
 
 const riskColors: Record<string, string> = {
@@ -35,6 +36,16 @@ const riskBadgeClass: Record<string, string> = {
   alto: "bg-destructive/10 text-destructive",
   medio: "bg-secondary/10 text-secondary",
   basso: "bg-accent/10 text-accent",
+};
+
+// Convert lat/lng to SVG coordinates for an accurate Italy map
+// Italy bounding box approx: lat 36-47.5, lng 6.5-18.5
+const toSvg = (lat: number, lng: number): { x: number; y: number } => {
+  const minLat = 35.5, maxLat = 47.5, minLng = 6.0, maxLng = 19.0;
+  const svgWidth = 500, svgHeight = 650;
+  const x = ((lng - minLng) / (maxLng - minLng)) * svgWidth;
+  const y = ((maxLat - lat) / (maxLat - minLat)) * svgHeight;
+  return { x, y };
 };
 
 const SeismicMapSection = () => {
@@ -60,7 +71,7 @@ const SeismicMapSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Map SVG */}
+          {/* Map */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -68,96 +79,131 @@ const SeismicMapSection = () => {
             transition={{ duration: 0.6 }}
             className="relative"
           >
-            <div className="rounded-2xl bg-card border border-border p-6 shadow-lg">
-              <svg viewBox="60 30 320 450" className="w-full h-auto" style={{ maxHeight: "550px" }}>
-                {/* Italy simplified outline */}
+            <div className="rounded-2xl bg-card border border-border p-4 md:p-6 shadow-lg">
+              <svg viewBox="0 0 500 650" className="w-full h-auto" style={{ maxHeight: "600px" }}>
+                <defs>
+                  <linearGradient id="seaGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="hsl(200, 60%, 95%)" />
+                    <stop offset="100%" stopColor="hsl(200, 50%, 90%)" />
+                  </linearGradient>
+                  <filter id="landShadow" x="-5%" y="-5%" width="110%" height="110%">
+                    <feDropShadow dx="2" dy="3" stdDeviation="4" floodColor="hsl(215, 25%, 60%)" floodOpacity="0.2" />
+                  </filter>
+                </defs>
+
+                {/* Sea background */}
+                <rect width="500" height="650" fill="url(#seaGradient)" rx="8" />
+
+                {/* Italy mainland - detailed path */}
                 <path
-                  d="M200,50 L230,45 L260,50 L290,55 L320,70 L340,90 L350,110 L340,130 L320,140
-                     L300,135 L280,140 L270,155 L260,145 L240,150 L230,160 L220,170 L210,180
-                     L220,190 L230,200 L240,210 L250,220 L260,230 L270,240 L280,250 L290,260
-                     L295,275 L290,290 L285,305 L280,320 L285,335 L290,350 L295,365 L300,380
-                     L305,395 L300,410 L290,420 L280,415 L275,425 L265,435 L255,440 L260,445
-                     L275,450 L285,455 L280,465 L265,460 L255,450 L245,440 L250,430 L255,420
-                     L250,410 L240,405 L235,395 L230,385 L225,375 L220,365 L225,355 L230,345
-                     L225,335 L220,325 L215,315 L210,305 L205,295 L200,285 L195,275 L190,265
-                     L185,255 L180,245 L175,235 L170,225 L165,215 L160,210 L155,205 L150,200
-                     L145,195 L140,185 L145,175 L150,165 L155,155 L160,145 L165,135 L170,125
-                     L175,115 L180,105 L185,95 L190,80 L195,65 Z"
-                  fill="hsl(210, 30%, 93%)"
-                  stroke="hsl(215, 25%, 75%)"
+                  filter="url(#landShadow)"
+                  d="
+                    M 185 65 L 195 58 L 210 52 L 228 48 L 245 50 L 258 46 L 275 42 L 290 40 
+                    L 305 42 L 318 48 L 330 55 L 342 50 L 358 52 L 370 58 L 380 65 L 388 72
+                    L 392 82 L 395 92 L 390 100 L 382 108 L 375 95 L 365 88 L 355 85 L 345 88
+                    L 338 95 L 330 100 L 322 95 L 312 92 L 302 95 L 295 100 L 288 108
+                    L 280 112 L 270 108 L 262 105 L 255 110 L 248 115 L 240 118 L 232 122
+                    L 225 128 L 218 135 L 212 142 L 208 150 L 205 158 L 200 165 L 195 172
+                    L 192 180 L 188 188 L 185 195 L 182 202 L 178 210 L 175 218
+                    L 172 225 L 170 232 L 175 238 L 180 242 L 188 248 L 195 252 L 200 258
+                    L 208 262 L 215 268 L 222 275 L 228 282 L 235 288 L 240 295 L 245 302
+                    L 250 310 L 255 318 L 258 325 L 262 332 L 265 340 L 268 348 L 272 355
+                    L 275 362 L 278 370 L 282 378 L 288 385 L 292 392 L 298 398 L 302 405
+                    L 308 412 L 312 418 L 315 425 L 318 432 L 322 438 L 320 445 L 315 450
+                    L 308 455 L 302 460 L 298 468 L 295 475 L 290 480 L 285 485 L 280 478
+                    L 278 470 L 282 462 L 285 455 L 280 448 L 275 442 L 268 448 L 262 455
+                    L 258 462 L 252 468 L 248 460 L 245 452 L 242 445 L 238 438 L 235 430
+                    L 232 422 L 228 415 L 225 408 L 222 400 L 218 392 L 215 385 L 212 378
+                    L 208 370 L 205 362 L 202 355 L 198 348 L 195 340 L 192 332 L 188 325
+                    L 185 318 L 182 310 L 178 302 L 175 295 L 172 288 L 168 280 L 165 272
+                    L 162 265 L 158 258 L 155 250 L 152 242 L 148 235 L 145 228 L 142 220
+                    L 138 212 L 135 205 L 132 198 L 135 190 L 140 182 L 145 175 L 148 168
+                    L 152 160 L 155 152 L 158 145 L 162 138 L 165 130 L 168 122 L 172 115
+                    L 175 108 L 178 100 L 180 92 L 182 82 L 183 72 Z
+                  "
+                  fill="hsl(210, 25%, 92%)"
+                  stroke="hsl(215, 30%, 72%)"
                   strokeWidth="1.5"
+                  strokeLinejoin="round"
                 />
 
                 {/* Sardinia */}
                 <path
-                  d="M145,250 L155,240 L160,250 L165,265 L170,280 L175,295 L170,310 L165,325
-                     L160,335 L155,340 L148,335 L142,325 L138,310 L135,295 L138,280 L140,265 Z"
-                  fill="hsl(210, 30%, 93%)"
-                  stroke="hsl(215, 25%, 75%)"
+                  filter="url(#landShadow)"
+                  d="
+                    M 95 288 L 105 278 L 112 272 L 118 275 L 122 282 L 126 290 L 130 298
+                    L 132 308 L 134 318 L 135 328 L 134 338 L 132 348 L 128 358 L 125 368
+                    L 120 375 L 115 380 L 108 378 L 102 372 L 98 365 L 95 355 L 92 345
+                    L 90 335 L 88 325 L 88 315 L 90 305 L 92 295 Z
+                  "
+                  fill="hsl(210, 25%, 92%)"
+                  stroke="hsl(215, 30%, 72%)"
                   strokeWidth="1.5"
+                  strokeLinejoin="round"
                 />
 
                 {/* Sicily */}
                 <path
-                  d="M225,410 L240,405 L255,408 L270,412 L285,418 L295,425 L290,435 L280,440
-                     L265,445 L250,442 L238,435 L228,425 L225,418 Z"
-                  fill="hsl(210, 30%, 93%)"
-                  stroke="hsl(215, 25%, 75%)"
+                  filter="url(#landShadow)"
+                  d="
+                    M 210 485 L 225 478 L 240 475 L 255 472 L 270 475 L 285 478 L 298 482
+                    L 310 488 L 318 495 L 315 502 L 308 508 L 298 512 L 288 515 L 275 516
+                    L 262 515 L 248 512 L 238 508 L 228 502 L 220 495 L 215 490 Z
+                  "
+                  fill="hsl(210, 25%, 92%)"
+                  stroke="hsl(215, 30%, 72%)"
                   strokeWidth="1.5"
+                  strokeLinejoin="round"
                 />
 
+                {/* Region borders (simplified internal lines) */}
+                {/* Po valley line */}
+                <path d="M 135 130 L 180 120 L 230 118 L 280 112 L 330 100" stroke="hsl(215, 20%, 82%)" strokeWidth="0.8" fill="none" strokeDasharray="4,3" />
+                {/* Central Appennines */}
+                <path d="M 200 165 L 215 195 L 225 230 L 240 270 L 255 310 L 270 350 L 285 390 L 300 420" stroke="hsl(215, 20%, 82%)" strokeWidth="0.8" fill="none" strokeDasharray="4,3" />
+
                 {/* Earthquake zone markers */}
-                {zones.map((zone) => (
-                  <g
-                    key={zone.id}
-                    onClick={() => setSelectedZone(zone)}
-                    className="cursor-pointer"
-                  >
-                    {/* Pulse ring */}
-                    <circle
-                      cx={zone.cx}
-                      cy={zone.cy}
-                      r="12"
-                      fill="none"
-                      stroke={riskColors[zone.risk]}
-                      strokeWidth="1"
-                      opacity="0.4"
+                {zones.map((zone) => {
+                  const { x, y } = toSvg(zone.lat, zone.lng);
+                  return (
+                    <g
+                      key={zone.id}
+                      onClick={() => setSelectedZone(zone)}
+                      className="cursor-pointer"
                     >
-                      <animate
-                        attributeName="r"
-                        values="8;16;8"
-                        dur="2s"
-                        repeatCount="indefinite"
-                      />
-                      <animate
-                        attributeName="opacity"
-                        values="0.6;0;0.6"
-                        dur="2s"
-                        repeatCount="indefinite"
-                      />
-                    </circle>
-                    {/* Dot */}
-                    <circle
-                      cx={zone.cx}
-                      cy={zone.cy}
-                      r="6"
-                      fill={riskColors[zone.risk]}
-                      stroke="white"
-                      strokeWidth="2"
-                      className="transition-all hover:r-8"
-                    />
-                    {selectedZone?.id === zone.id && (
+                      {/* Outer pulse ring */}
+                      <circle cx={x} cy={y} r="14" fill="none" stroke={riskColors[zone.risk]} strokeWidth="1" opacity="0.3">
+                        <animate attributeName="r" values="10;20;10" dur="2.5s" repeatCount="indefinite" />
+                        <animate attributeName="opacity" values="0.5;0;0.5" dur="2.5s" repeatCount="indefinite" />
+                      </circle>
+                      {/* Inner dot */}
                       <circle
-                        cx={zone.cx}
-                        cy={zone.cy}
-                        r="10"
-                        fill="none"
-                        stroke={riskColors[zone.risk]}
+                        cx={x}
+                        cy={y}
+                        r="7"
+                        fill={riskColors[zone.risk]}
+                        stroke="white"
                         strokeWidth="2.5"
+                        className="transition-transform"
                       />
-                    )}
-                  </g>
-                ))}
+                      {/* Selection ring */}
+                      {selectedZone?.id === zone.id && (
+                        <circle cx={x} cy={y} r="12" fill="none" stroke={riskColors[zone.risk]} strokeWidth="2.5" />
+                      )}
+                      {/* Label */}
+                      <text
+                        x={x + 12}
+                        y={y + 4}
+                        fontSize="9"
+                        fill="hsl(215, 30%, 40%)"
+                        fontWeight="600"
+                        className="pointer-events-none select-none"
+                      >
+                        {zone.name.split(" (")[0].split(" ").slice(0, 2).join(" ")}
+                      </text>
+                    </g>
+                  );
+                })}
               </svg>
 
               {/* Legend */}

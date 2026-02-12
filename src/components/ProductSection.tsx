@@ -57,20 +57,24 @@ const ProductSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h3 className="font-display text-2xl font-bold text-foreground mb-4">
-              Specifiche Tecniche
+              Cosa fa SISMA.net
             </h3>
+            <p className="text-muted-foreground leading-relaxed mb-6">
+              Il dispositivo SISMA.net è un sismografo compatto e intelligente, progettato per essere installato
+              facilmente in qualsiasi ambiente — da casa tua alla scuola, dagli uffici agli edifici pubblici.
+            </p>
             <ul className="space-y-4 text-muted-foreground">
               {[
-                { label: "Processore", value: "Arduino Uno R3 / Nano" },
-                { label: "Sensore", value: "Accelerometro ADXL345 a 3 assi" },
-                { label: "Connettività", value: "Modulo ESP8266 WiFi" },
-                { label: "Alimentazione", value: "USB 5V / Batteria di backup" },
-                { label: "Dimensioni", value: "12 × 8 × 5 cm" },
-                { label: "Software", value: "Dashboard web per visualizzazione dati" },
-              ].map((spec, i) => (
+                "Rileva le onde sismiche in tempo reale con estrema precisione",
+                "Invia notifiche immediate al tuo smartphone",
+                "Si connette automaticamente alla rete WiFi",
+                "Funziona 24 ore su 24, 7 giorni su 7",
+                "Dashboard web per monitorare i dati raccolti",
+                "Design compatto e resistente per ogni ambiente",
+              ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <span className="w-2 h-2 mt-2 rounded-full bg-accent flex-shrink-0" />
-                  <span><strong className="text-foreground">{spec.label}:</strong> {spec.value}</span>
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
