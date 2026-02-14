@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import { AlertTriangle, Activity, MapPin } from "lucide-react";
-import { useState, useEffect } from "react";
-import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+import { useState } from "react";
 
 interface EarthquakeZone {
   id: string;
@@ -40,14 +38,11 @@ const riskBadgeClass: Record<string, string> = {
   basso: "bg-accent/10 text-accent",
 };
 
-const FlyToZone = ({ zone }: { zone: EarthquakeZone | null }) => {
-  const map = useMap();
-  useEffect(() => {
-    if (zone) {
-      map.flyTo([zone.lat, zone.lng], 9, { duration: 1.2 });
-    }
-  }, [zone, map]);
-  return null;
+const getMapUrl = (zone: EarthquakeZone | null) => {
+  if (zone) {
+    return `https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d100000!2d${zone.lng}!3d${zone.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sit!4v1700000000000!5m2!1sen!2sit`;
+  }
+  return `https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2500000!2d12.5!3d42.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sit!4v1700000000000!5m2!1sen!2sit`;
 };
 
 const SeismicMapSection = () => {
@@ -73,7 +68,7 @@ const SeismicMapSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Leaflet Map */}
+          {/* Google Maps Embed */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -81,40 +76,17 @@ const SeismicMapSection = () => {
             transition={{ duration: 0.6 }}
           >
             <div className="rounded-2xl bg-card border border-border shadow-lg overflow-hidden">
-              <MapContainer
-                center={[42.0, 12.5]}
-                zoom={6}
-                style={{ height: "500px", width: "100%" }}
-                scrollWheelZoom={false}
-              >
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <FlyToZone zone={selectedZone} />
-                {zones.map((zone) => (
-                  <CircleMarker
-                    key={zone.id}
-                    center={[zone.lat, zone.lng]}
-                    radius={selectedZone?.id === zone.id ? 14 : 10}
-                    pathOptions={{
-                      color: "white",
-                      weight: 2,
-                      fillColor: riskColors[zone.risk],
-                      fillOpacity: 0.85,
-                    }}
-                    eventHandlers={{
-                      click: () => setSelectedZone(zone),
-                    }}
-                  >
-                    <Popup>
-                      <strong>{zone.name}</strong><br />
-                      Rischio: {zone.risk}<br />
-                      {zone.recentEvents}
-                    </Popup>
-                  </CircleMarker>
-                ))}
-              </MapContainer>
+              <iframe
+                key={selectedZone?.id || "default"}
+                src={getMapUrl(selectedZone)}
+                width="100%"
+                height="500"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Mappa sismica Italia"
+              />
               <div className="flex items-center justify-center gap-6 p-4 border-t border-border">
                 {[
                   { label: "Rischio Alto", color: riskColors.alto },
@@ -168,7 +140,7 @@ const SeismicMapSection = () => {
                 <MapPin className="w-12 h-12 text-accent/40 mx-auto mb-4" />
                 <h3 className="font-display text-xl font-semibold text-foreground mb-2">Seleziona una zona</h3>
                 <p className="text-muted-foreground text-sm">
-                  Clicca su uno dei punti sulla mappa o nell'elenco per visualizzare le informazioni sulla sismicità della zona.
+                  Clicca su una zona nell'elenco per visualizzarla sulla mappa.
                 </p>
               </div>
             )}
